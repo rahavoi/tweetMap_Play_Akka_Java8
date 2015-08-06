@@ -3,6 +3,7 @@
 @main(message) {
 
     <div ng-controller="Tweets">
+        <leaflet width="100%" height="500px" markers="markers"></leaflet>
         <ul>
             <li ng-repeat="tweet in tweets">{{tweet.text}}</li>
         </ul>

@@ -21,6 +21,27 @@ app.factory('Twitter', function($http, $timeout) {
 });
 
 app.controller('Search', function($scope, $http, $timeout, Twitter) {
+    $scope.tweets = [];
+    $scope.markers = [];
+
+    $scope.$watch(
+        function() {
+            return Twitter.tweets;
+        },
+        function(tweets) {
+            $scope.tweets = tweets;
+
+            $scope.markers = tweets.map(function(tweet) {
+                return {
+                    lng: tweet.coordinates[0],
+                    lat: tweet.coordinates[1],
+                    message: tweet.text,
+                    focus: true
+                }
+            });
+        }
+    );
+
 
     $scope.search = function() {
         Twitter.query($scope.query);
